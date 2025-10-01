@@ -13,5 +13,6 @@ Nivel dificl: la cancion reversa y a elegir 4 opciones
 
 ## Fase 2
 Worddle
+La carutula dividida en 9 trozos y se van girando con cada intento de adivinar, teniendo 8 intentos de adivinar el nombre de la cancion o disco
 
 # Preguntas primera fase
