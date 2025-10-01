@@ -1,6 +1,6 @@
 # Ideas iniciales
 ## Fase 1
-PREGUNTADOS
+Preguntados
 
 Preguntas de 3 niveles de dificultad 
 
