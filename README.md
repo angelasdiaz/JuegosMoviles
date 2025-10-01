@@ -6,5 +6,4 @@ Nivel normal: la cancion instrumental y a elegir 4 opciones
 Nivel dificl: la cancion reversa y a elegir 4 opciones
 
 ## Fase 2
-
-#Prefuntas primera fase
+# Prefuntas primera fase
