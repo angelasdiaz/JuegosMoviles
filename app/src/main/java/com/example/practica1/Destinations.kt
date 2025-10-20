@@ -32,4 +32,4 @@ object EndGame : Destination {
 }
 
 // Pantallas disponibles en la barra superior
-val tabRowScreens = listOf(MainMenu, Options)
+val tabRowScreens = listOf(MainMenu, Options, Game, EndGame)

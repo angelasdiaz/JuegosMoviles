@@ -32,6 +32,7 @@ import com.example.practica1.Destination
 import java.util.Locale
 
 
+// Funcion que customiza la barra superior donde aparecen los menus
 @Composable
 fun CustomTabRow(
     allScreens: List<Destination>,

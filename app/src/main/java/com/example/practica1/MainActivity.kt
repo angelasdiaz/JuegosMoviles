@@ -23,6 +23,7 @@ import com.example.practica1.ui.components.CustomNavHost
 import com.example.practica1.ui.theme.Practica1Theme
 
 
+// Funcion principal
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +41,11 @@ fun App() {
         val currentBackStack by navController.currentBackStackEntryAsState()
         val currentDestination = currentBackStack?.destination
         val currentScreen = tabRowScreens.find { it.route == currentDestination?.route } ?: MainMenu
+
         Scaffold(
             topBar = {
                 CustomTabRow(
-                    allScreens = tabRowScreens,
+                    allScreens = tabRowScreens, // Se muestran las pantallas almacenadas
                     onTabSelected = { newScreen ->
                         navController.navigate(newScreen.route) {launchSingleTop = true}
                     },
@@ -52,7 +54,7 @@ fun App() {
             }
         ) { innerPadding ->
             CustomNavHost(
-                navController = navController,
+                navController = navController, // Se asigna el controlador de pantallas
                 modifier = Modifier.padding(innerPadding)
             )
         }

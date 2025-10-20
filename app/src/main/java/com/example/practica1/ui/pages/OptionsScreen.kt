@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+// Pantalla de opciones
 @Composable
 fun OptionsScreen() {
     Column (
@@ -16,6 +17,7 @@ fun OptionsScreen() {
     }
 }
 
+// Preview de la pantalla de opciones
 @Preview
 @Composable
 fun OptionsScreen_preview() {
