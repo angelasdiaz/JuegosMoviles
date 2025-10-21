@@ -1,18 +1,13 @@
-# Ideas iniciales
-## Fase 1
-Preguntados
+# Práctica 1: "Dj URJC"
+## Desarrollo de aplicaciones para dispositivos móviles 
+### Grupo 04:
+- Garazi Blanco Jauregi
+- Alberto Lopez Garcia de Ceca
+- Pablo García García
+- Cristina González de Lope
+- Ángela Sánchez Díaz
+- Diego Gómez Martín
 
-Preguntas de 3 niveles de dificultad 
 
 
-Nivel facil: la cancion tal cual y a elegir 4 opciones
 
-Nivel normal: la cancion instrumental y a elegir 4 opciones
-
-Nivel dificl: la cancion reversa y a elegir 4 opciones
-
-## Fase 2
-Worddle
-La carutula dividida en 9 trozos y se van girando con cada intento de adivinar, teniendo 8 intentos de adivinar el nombre de la cancion o disco
-
-# Preguntas primera fase

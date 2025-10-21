@@ -2,44 +2,51 @@ package com.example.practica1
 
 object BancoDePreguntas {
 
+    // Base de datos de las preguntas
     fun obtenerPreguntas(): List<Pregunta> {
         return listOf(
             Pregunta(
                 texto = "¿Qué canción fue la más escuchada en España en 2022?",
                 opciones = listOf("Despechá - Rosalía", "Quevedo: Bzrp Music Sessions, Vol.52", "La Bachata - Manuel Turizo", "Tarot - Bad Bunny, Jhayco"),
                 respuestaCorrecta = 1,
-                dificultad = 0
+                dificultad = 0,
+                imageId = R.drawable.mix1
             ),
             Pregunta(
                 texto = "¿A qué álbum pertenece la siguiente canción?",
                 opciones = listOf("Un verano sin ti", "Vice Versa", "Donde quiero estar", "Easy Money Baby"),
                 respuestaCorrecta = 2,
-                dificultad = 0
+                dificultad = 0,
+                imageId = R.drawable.playadelingles
             ),
             Pregunta(
                 texto = "¿Como se llama este éxito viral de Sabrina Carpenter que dominó las listas en 2024?",
                 opciones = listOf("Please Please Please", "Espresso", "Feather", "Nonsense"),
                 respuestaCorrecta = 1,
-                dificultad = 0
+                dificultad = 0,
+                imageId = R.drawable.mix2
             ),
             Pregunta(
                 texto = "¿Como se llama esta colaboración de Mark Ronson y Bruno Mars?",
                 opciones = listOf("24K Magic", "Locked Out of Heaven", "Treasure", "Uptown Funk"),
                 respuestaCorrecta = 3,
-                dificultad = 0
+                dificultad = 0,
+                imageId = R.drawable.uptownfunk
             ),
             Pregunta(
                 texto = "¿A qué artistas internacionales pertenece esta canción?",
                 opciones = listOf("Taylor Swift y Sabrina Carpenter", "Taylor Swift y Olivia Rodrigo", "Taylor Swift y Charli XCX", "Taylor Swift y Gracie Abrams"),
                 respuestaCorrecta = 0,
                 dificultad = 0,
-                audioResId = R.raw.thelifeofashowgirl
+                audioResId = R.raw.thelifeofashowgirl,
+                imageId = R.drawable.thelifeofashowgirl
             ),
             Pregunta(
                 texto = "¿Cuál fue el primer álbum de Sabrina Carpenter?",
                 opciones = listOf("Short n’ Sweet", "Can't Blame a Girl for Trying", "Emails I Cant Send", "Eyes Wide Open"),
                 respuestaCorrecta = 3,
-                dificultad = 0
+                dificultad = 0,
+                imageId = R.drawable.mix3
             ),
             Pregunta(
                 texto = "A qué grupo de rock español pertenece esta canción?",
@@ -52,7 +59,8 @@ object BancoDePreguntas {
                 texto = "¿Cuál fue el disco más reproducido de 2024?",
                 opciones = listOf("HIT ME HARD AND SOFT - Billie Eilish", "Short n' Sweet - Sabrina Carpenter", "THE TORTURED POETS DEPARTMENT - Taylor Swift", "eternal sunshine - Ariana Grande"),
                 respuestaCorrecta = 2,
-                dificultad = 0
+                dificultad = 0,
+                imageId = R.drawable.mix4
             ),
             Pregunta(
                 texto = "¿Qué canción corresponde a la siguiente base?",
@@ -65,7 +73,7 @@ object BancoDePreguntas {
                 texto = "¿En cuál de las siguientes canciones no colabora el artista Bad Bunny?",
                 opciones = listOf("No me conoce remix", "Te boté remix", "Me llueven 3.0", "47 - remix"),
                 respuestaCorrecta = 3,
-                dificultad = 1
+                dificultad = 1,
             ),
             Pregunta(
                 texto = "Esta icónica melodía de sintetizador pertenece a uno de los mayores éxitos de The Weekend. ¿De qué canción se trata?",
@@ -106,7 +114,8 @@ object BancoDePreguntas {
                 texto = "¿En qué año fue el que más se escuchó la famosa canción de 'Señorita' de Abraham Mateo?",
                 opciones = listOf("2013", "2012", "2009", "2014"),
                 respuestaCorrecta = 0,
-                dificultad = 1
+                dificultad = 1,
+                imageId = R.drawable.senorita
             ),
             Pregunta(
                 texto = "¿Cuál es la siguiente canción en reversa?",

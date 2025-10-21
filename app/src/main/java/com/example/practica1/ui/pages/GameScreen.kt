@@ -6,6 +6,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.Image
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -47,7 +49,18 @@ fun GameScreen(
             style = MaterialTheme.typography.titleMedium
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        // Si la pregunta actual cuenta con una foto la muestra, sino no muestra nada
+        uiState.preguntaActual.imageId?.let {
+            Image(
+                painter = painterResource(id = it),
+                contentDescription = "imagenAsociada",
+                modifier = Modifier
+                    .width(350.dp)
+                    .height(350.dp),
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
 
         // Texto de la Pregunta
         Text(
@@ -74,7 +87,7 @@ fun GameScreen(
 @Preview
 @Composable
 fun GameScreen_preview() {
-    // Nota: El preview ya no funciona directamente porque GameScreen ahora requiere el NavController y ViewModel.
-    // Para el preview real, debes envolverlo con un NavController simulado.
+    // El preview ya no funciona directamente porque GameScreen ahora necesita el NavController y ViewModel
+    // Ahora hay que envolverlo con un NavController simulado
     Text("GameScreen Preview: Requiere NavController")
 }
