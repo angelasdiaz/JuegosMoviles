@@ -28,7 +28,7 @@ object Options : Destination {
 
 object EndGame : Destination {
     override val icon = Icons.Filled.Info
-    override val route = "endGame"
+    override val route = "endGame/{puntuacion}/{totalPreguntas}"
 }
 
 // Pantallas disponibles en la barra superior

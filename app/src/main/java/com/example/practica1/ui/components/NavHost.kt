@@ -1,14 +1,19 @@
+// NavHost.kt (Reemplazado)
 package com.example.practica1.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+
 import com.example.practica1.ui.pages.MainMenuScreen
 import com.example.practica1.ui.pages.OptionsScreen
 import com.example.practica1.ui.pages.GameScreen
 import com.example.practica1.ui.pages.EndGameScreen
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.NavHost
+
 import com.example.practica1.EndGame
 import com.example.practica1.Game
 import com.example.practica1.MainMenu
@@ -23,7 +28,7 @@ fun CustomNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = MainMenu.route, //La pantalla de comienzo siempre sera el menu principal
+        startDestination = MainMenu.route,
         modifier = modifier
     ) {
         // Botones y navegacion dentro del menu principal
@@ -35,24 +40,40 @@ fun CustomNavHost(
                 onSeeOptionsClick ={
                     navController.navigate(Options.route) {launchSingleTop = true}
                 }
-
             )
         }
+
         // Botones y navegacion dentro del menu de opciones
         composable(route = Options.route) {
             OptionsScreen()
         }
+
         // Botones y navegacion dentro del menu del juego
         composable(route = Game.route) {
-            GameScreen(
-                onSeeEndGameClick ={
-                    navController.navigate(EndGame.route) {launchSingleTop = true}
-                }
-            )
+            // NOTA: GameScreen ahora necesita el NavController para navegar a EndGame
+            GameScreen(navController = navController)
         }
-        // Botones y navegacion dentro del menu final
-        composable(route = EndGame.route) {
-            EndGameScreen()
+
+        // Botones y navegacion dentro del menu final (¡Ahora con argumentos!)
+        composable(
+            route = EndGame.route,
+            // 1. Definimos los argumentos que esperamos recibir
+            arguments = listOf(
+                navArgument("puntuacion") { type = NavType.IntType },
+                navArgument("totalPreguntas") { type = NavType.IntType }
+            )
+        ) { backStackEntry ->
+
+            // 2. Extraemos los argumentos de la ruta
+            val puntuacion = backStackEntry.arguments?.getInt("puntuacion") ?: 0
+            val totalPreguntas = backStackEntry.arguments?.getInt("totalPreguntas") ?: 1
+
+            // 3. Pasamos los argumentos a la pantalla
+            EndGameScreen(
+                navController = navController,
+                puntuacion = puntuacion,
+                totalPreguntas = totalPreguntas
+            )
         }
     }
 }

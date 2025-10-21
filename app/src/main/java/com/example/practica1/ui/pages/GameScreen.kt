@@ -1,33 +1,80 @@
+// GameScreen.kt (Reemplazado)
 package com.example.practica1.ui.pages
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.practica1.GameViewModel
+import com.example.practica1.EndGame
+import com.example.practica1.Game
 
 // Pantalla de juego
-
 @Composable
 fun GameScreen(
-    onSeeEndGameClick: () -> Unit = {},
+    navController: androidx.navigation.NavController, // Necesitas el NavController para navegar
+    viewModel: GameViewModel = viewModel() // Crea o encuentra el ViewModel
+) {
+    val uiState = viewModel.uiState
+
+    // 1. LÓGICA DE NAVEGACIÓN: Si el juego ha terminado, vamos a la pantalla final
+    if (uiState.juegoTerminado) {
+        // Construye la ruta con los valores reales de puntuación y total
+        navController.navigate(EndGame.route
+            .replace("{puntuacion}", uiState.puntuacion.toString())
+            .replace("{totalPreguntas}", uiState.totalPreguntas.toString())
+        ) {
+            // Esto evita que al pulsar "Atrás" se vuelva a esta pantalla de juego ya terminada
+            popUpTo(Game.route) { inclusive = true }
+        }
+    }
+
+    // 2. DISEÑO DE LA PANTALLA
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-    Column (
-        modifier = Modifier.padding(16.dp)
-    ){
-        Button(onClick = { onSeeEndGameClick() }) {
-            Text("Acabar nivel")
+        // Indicador de Pregunta
+        Text(
+            text = "Pregunta ${uiState.indicePreguntaActual + 1} de ${uiState.totalPreguntas}",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // Texto de la Pregunta
+        Text(
+            text = uiState.preguntaActual.texto,
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        // Opciones de Respuesta (Botones)
+        uiState.preguntaActual.opciones.forEachIndexed { index, opcion ->
+            Button(
+                onClick = { viewModel.verificarRespuesta(index) },
+                // Deshabilitar los botones si ya se pulsó o si el juego terminó
+                enabled = !uiState.seleccionBloqueada && !uiState.juegoTerminado,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(opcion)
+            }
         }
     }
 }
-
 
 // Preview de la pantalla de juego
 @Preview
 @Composable
 fun GameScreen_preview() {
-    GameScreen()
+    // Nota: El preview ya no funciona directamente porque GameScreen ahora requiere el NavController y ViewModel.
+    // Para el preview real, debes envolverlo con un NavController simulado.
+    Text("GameScreen Preview: Requiere NavController")
 }
