@@ -6,35 +6,49 @@ object BancoDePreguntas {
     fun obtenerPreguntas(): List<Pregunta> {
         return listOf(
             Pregunta(
-                texto = "¿Qué canción fue la más escuchada en España en 2022?",
+                texto = "¿Qué canción de las siguientes fue la más escuchada en España en 2022?",
                 opciones = listOf("Despechá - Rosalía", "Quevedo: Bzrp Music Sessions, Vol.52", "La Bachata - Manuel Turizo", "Tarot - Bad Bunny, Jhayco"),
                 respuestaCorrecta = 1,
                 dificultad = 0,
                 imageId = R.drawable.mix1
             ),
             Pregunta(
-                texto = "¿A qué álbum pertenece la siguiente canción?",
+                texto = "¿A qué álbum pertenece la canción de la imagen?",
                 opciones = listOf("Un verano sin ti", "Vice Versa", "Donde quiero estar", "Easy Money Baby"),
                 respuestaCorrecta = 2,
                 dificultad = 0,
                 imageId = R.drawable.playadelingles
             ),
             Pregunta(
-                texto = "¿Como se llama este éxito viral de Sabrina Carpenter que dominó las listas en 2024?",
+                texto = "¿Cómo se llama este éxito viral de Sabrina Carpenter que dominó las listas de éxitos en 2024?",
                 opciones = listOf("Please Please Please", "Espresso", "Feather", "Nonsense"),
                 respuestaCorrecta = 1,
                 dificultad = 0,
                 imageId = R.drawable.mix2
             ),
             Pregunta(
-                texto = "¿Como se llama esta colaboración de Mark Ronson y Bruno Mars?",
+                texto = "¿Cómo se llama esta colaboración de Mark Ronson y Bruno Mars?",
                 opciones = listOf("24K Magic", "Locked Out of Heaven", "Treasure", "Uptown Funk"),
                 respuestaCorrecta = 3,
                 dificultad = 0,
                 imageId = R.drawable.uptownfunk
             ),
             Pregunta(
-                texto = "¿A qué artistas internacionales pertenece esta canción?",
+                texto = "¿Cuál fue el álbum debut del artista emergente Rusowsky?",
+                opciones = listOf("Pórtate bien!", "Daisy", "Data", "Primera musa"),
+                respuestaCorrecta = 2,
+                dificultad = 0,
+                imageId = R.drawable.mix5
+            ),
+            Pregunta(
+                texto = "¿A qué álbum pertenece la canción de la imagen?",
+                opciones = listOf("Desde el Fin del Mundo", "MTFC", "Supernova", "Data"),
+                respuestaCorrecta = 3,
+                dificultad = 0,
+                imageId = R.drawable.volver
+            ),
+            Pregunta(
+                texto = "¿A qué artistas internacionales pertenece la canción que está sonando?",
                 opciones = listOf("Taylor Swift y Sabrina Carpenter", "Taylor Swift y Olivia Rodrigo", "Taylor Swift y Charli XCX", "Taylor Swift y Gracie Abrams"),
                 respuestaCorrecta = 0,
                 dificultad = 0,
@@ -49,21 +63,21 @@ object BancoDePreguntas {
                 imageId = R.drawable.mix3
             ),
             Pregunta(
-                texto = "A qué grupo de rock español pertenece esta canción?",
+                texto = "A qué grupo de rock español pertenece la canción que está sonando?",
                 opciones = listOf("Pignoise", "Marea", "Extremoduro", "Kaotiko"),
                 respuestaCorrecta = 2,
                 dificultad = 0,
                 audioResId = R.raw.jesucristogarcia
             ),
             Pregunta(
-                texto = "¿Cuál fue el disco más reproducido de 2024?",
+                texto = "¿Cuál de los siguientes fue el disco más reproducido de 2024?",
                 opciones = listOf("HIT ME HARD AND SOFT - Billie Eilish", "Short n' Sweet - Sabrina Carpenter", "THE TORTURED POETS DEPARTMENT - Taylor Swift", "eternal sunshine - Ariana Grande"),
                 respuestaCorrecta = 2,
                 dificultad = 0,
                 imageId = R.drawable.mix4
             ),
             Pregunta(
-                texto = "¿Qué canción corresponde a la siguiente base?",
+                texto = "¿Qué canción corresponde con la base que está sonando?",
                 opciones = listOf("Baby Hello - Rauw Alejandro", "Una última vez - Soge Culebra, Saiko", "Neverita - Bad Bunny", "Supernova - Saiko"),
                 respuestaCorrecta = 3,
                 dificultad = 1,
@@ -76,7 +90,7 @@ object BancoDePreguntas {
                 dificultad = 1,
             ),
             Pregunta(
-                texto = "Esta icónica melodía de sintetizador pertenece a uno de los mayores éxitos de The Weekend. ¿De qué canción se trata?",
+                texto = "Esta icónica melodía de sintetizador que está sonando pertenece a uno de los mayores éxitos de The Weekend. ¿De qué canción se trata?",
                 opciones = listOf("Save Your Tears", "Starboy", "Blinding Lights", "Can’t Feel My Face"),
                 respuestaCorrecta = 2,
                 dificultad = 1,
@@ -90,6 +104,18 @@ object BancoDePreguntas {
                 audioResId = R.raw.someonelikeyou
             ),
             Pregunta(
+                texto = "¿Cómo se llama la canción del dúo icónico de Ralphie Choo y Rusowsky que está sonando?",
+                opciones = listOf("ALTAGAMA", "DtMF", "VOYCONTODO", "BBY ROMEO"),
+                respuestaCorrecta = 3,
+                dificultad = 1,
+            ),
+            Pregunta(
+                texto = "¿Cómo se llama este himno del trap argentino, con artistas como Duki, Khea y C.R.O?",
+                opciones = listOf("Tumando el Club", "GIVENCHY", "Mbappe", "Nueva Era"),
+                respuestaCorrecta = 0,
+                dificultad = 1,
+            ),
+            Pregunta(
                 texto = "¿Cómo se llama esta canción de Mother Mother?",
                 opciones = listOf("Hayloft", "Arms Tonite", "Hayloft II", "Burning Pile"),
                 respuestaCorrecta = 0,
@@ -97,7 +123,7 @@ object BancoDePreguntas {
                 audioResId = R.raw.hailoft
             ),
             Pregunta(
-                texto = "¿Cómo se llama esta canción?",
+                texto = "¿Cómo se llama la canción que está sonando?",
                 opciones = listOf("Clean", "Messy", "Dirty", "Soft"),
                 respuestaCorrecta = 1,
                 dificultad = 1,
@@ -118,7 +144,7 @@ object BancoDePreguntas {
                 imageId = R.drawable.senorita
             ),
             Pregunta(
-                texto = "¿Cuál es la siguiente canción en reversa?",
+                texto = "¿Cuál es el nombre de la siguiente canción en reversa?",
                 opciones = listOf("Aurora - Mora, De la Rose", "Droga - Mota, C Tangana", "Memorias - Mora", "512 - Mora"),
                 respuestaCorrecta = 1,
                 dificultad = 2
@@ -139,6 +165,18 @@ object BancoDePreguntas {
                 texto = "Esta canción usó un loop de percusión tropical que fue un éxito mundial masivo para Ed Sheeran. ¿Puedes identificarla al revés?",
                 opciones = listOf("Perfect", "Shape of You", "Castle on the Hill", "Bad Habits"),
                 respuestaCorrecta = 1,
+                dificultad = 2
+            ),
+            Pregunta(
+                texto = "¿Cómo se llama este éxito de Duki y Khea, sacado en 2017, que se escucha en reversa?",
+                opciones = listOf("WACHA", "AURORA", "She Don't Give a Fo", "QUEVASHACERHOY?"),
+                respuestaCorrecta = 2,
+                dificultad = 2
+            ),
+            Pregunta(
+                texto = "¿Cómo se llama este hit de 2025 interpretado por Bad Bunny, Omar Courtz y Dei V, reproducido en reversa?",
+                opciones = listOf("VeLDÁ", "EoO", "Malbec", "Konbini Wars"),
+                respuestaCorrecta = 0,
                 dificultad = 2
             ),
             Pregunta(
