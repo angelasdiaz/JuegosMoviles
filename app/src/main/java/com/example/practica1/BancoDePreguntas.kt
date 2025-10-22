@@ -154,7 +154,8 @@ object BancoDePreguntas {
                 opciones = listOf("2013", "2012", "2009", "2014"),
                 respuestaCorrecta = 0,
                 dificultad = 1,
-                imageId = R.drawable.senorita
+                imageId = R.drawable.senorita,
+                audioResId = R.raw.señorita
             ),
             Pregunta(
                 texto = "¿A qué canción pertenece la siguiente base instrumental?",
