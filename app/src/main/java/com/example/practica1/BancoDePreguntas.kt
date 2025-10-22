@@ -77,6 +77,18 @@ object BancoDePreguntas {
                 imageId = R.drawable.mix4
             ),
             Pregunta(
+                texto = "¿De qué banda es la canción “Numb”?",
+                opciones = listOf("Blink-182", "Foo Fighters", "Linkin Park", "Paramore"),
+                respuestaCorrecta = 2,
+                dificultad = 0,
+            ),
+            Pregunta(
+                texto = "¿Cuál de estos álbumes pertenece al grupo Green Day?",
+                opciones = listOf("Hybrid Theory", "American Idiot", "Meteora", "Franz Ferdinand"),
+                respuestaCorrecta = 1,
+                dificultad = 0,
+            ),
+            Pregunta(
                 texto = "¿Qué canción corresponde con la base que está sonando?",
                 opciones = listOf("Baby Hello - Rauw Alejandro", "Una última vez - Soge Culebra, Saiko", "Neverita - Bad Bunny", "Supernova - Saiko"),
                 respuestaCorrecta = 3,
@@ -108,12 +120,13 @@ object BancoDePreguntas {
                 opciones = listOf("ALTAGAMA", "DtMF", "VOYCONTODO", "BBY ROMEO"),
                 respuestaCorrecta = 3,
                 dificultad = 1,
+                audioResId = R.raw.todo
             ),
             Pregunta(
                 texto = "¿Cómo se llama este himno del trap argentino, con artistas como Duki, Khea y C.R.O?",
                 opciones = listOf("Tumando el Club", "GIVENCHY", "Mbappe", "Nueva Era"),
                 respuestaCorrecta = 0,
-                dificultad = 1,
+                dificultad = 1
             ),
             Pregunta(
                 texto = "¿Cómo se llama esta canción de Mother Mother?",
@@ -144,28 +157,46 @@ object BancoDePreguntas {
                 imageId = R.drawable.senorita
             ),
             Pregunta(
+                texto = "¿A qué canción pertenece la siguiente base instrumental?",
+                opciones = listOf("Crawling", "Basket Case", "All the Small Things", "In the End"),
+                respuestaCorrecta = 3,
+                dificultad = 1,
+                audioResId = R.raw.inthend
+            ),
+            Pregunta(
+                texto = "¿De qué canción es esta intro?",
+                opciones = listOf("Bring Me to Life", "All the Things She Said", "Pressure", "On my Own"),
+                respuestaCorrecta = 0,
+                dificultad = 1,
+                audioResId = R.raw.brigmetolife
+            ),
+            Pregunta(
                 texto = "¿Cuál es el nombre de la siguiente canción en reversa?",
                 opciones = listOf("Aurora - Mora, De la Rose", "Droga - Mota, C Tangana", "Memorias - Mora", "512 - Mora"),
                 respuestaCorrecta = 1,
-                dificultad = 2
+                dificultad = 2,
+                audioResId = R.raw.drogareversa
             ),
             Pregunta(
                 texto = "La siguiente canción en reversa es una de las más escuchadas de Feid, ¿de cuál se trata?",
                 opciones = listOf("La inocente", "Luna", "Classy 101", "Si te la encuentras por ahí"),
                 respuestaCorrecta = 0,
-                dificultad = 2
+                dificultad = 2,
+                audioResId = R.raw.inocentereversa
             ),
             Pregunta(
                 texto = "Esos violines agudos son inconfundibles, incluso al revés. ¿A qué clásico himno pop de Britney Spears pertenecen?",
                 opciones = listOf("…Baby One More Time", "Gimme More", "Oops!... I Did It Again", "Toxic"),
                 respuestaCorrecta = 3,
-                dificultad = 2
+                dificultad = 2,
+                audioResId = R.raw.toxicreversa
             ),
             Pregunta(
                 texto = "Esta canción usó un loop de percusión tropical que fue un éxito mundial masivo para Ed Sheeran. ¿Puedes identificarla al revés?",
                 opciones = listOf("Perfect", "Shape of You", "Castle on the Hill", "Bad Habits"),
                 respuestaCorrecta = 1,
-                dificultad = 2
+                dificultad = 2,
+                audioResId = R.raw.shapeofureversa
             ),
             Pregunta(
                 texto = "¿Cómo se llama este éxito de Duki y Khea, sacado en 2017, que se escucha en reversa?",
@@ -183,25 +214,43 @@ object BancoDePreguntas {
                 texto = "¿Cuál es esta canción de la película de Barbie?",
                 opciones = listOf("Speed Drive", "What Was I Made For?", "Dance The Night", "Barbie World"),
                 respuestaCorrecta = 0,
-                dificultad = 2
+                dificultad = 2,
+                audioResId = R.raw.speeddrivereversa
             ),
             Pregunta(
                 texto = "¿De quién es esta canción en reversa?",
                 opciones = listOf("Kaotiko", "Ska-P", "La Polla Records", "Extremoduro"),
                 respuestaCorrecta = 0,
-                dificultad = 2
+                dificultad = 2,
+                audioResId = R.raw.nocomobarbienoreversa
             ),
             Pregunta(
                 texto = "¿Cuál es esta canción en reversa?",
                 opciones = listOf("Cha cha cha", "Slow Down", "Come & Get it", "Von dutch"),
                 respuestaCorrecta = 2,
-                dificultad = 2
+                dificultad = 2,
+                audioResId = R.raw.comegaetitreversa
             ),
             Pregunta(
                 texto = "Esta canción en reversa es la más conocida de un grupo ¿Qué grupo es?",
                 opciones = listOf("Arctic Monkeys", "Twenty one pilots", "Panic at the disco", "The neighbourhood"),
                 respuestaCorrecta = 1,
-                dificultad = 2
+                dificultad = 2,
+                audioResId = R.raw.stressedreversa
+            ),
+            Pregunta(
+                texto = "¿Cuál es esta canción en reversa?",
+                opciones = listOf("Roxanne", "All Star", "Losing my Religion", "Take Me to Church"),
+                respuestaCorrecta = 2,
+                dificultad = 2,
+                audioResId = R.raw.religionreversa
+            ),
+            Pregunta(
+                texto = "¿A qué grupo pertenece esta canción en reversa?",
+                opciones = listOf("The Police", "Weezer", "Radiohead", "Nirvana"),
+                respuestaCorrecta = 1,
+                dificultad = 2,
+                audioResId = R.raw.inthesunreversa
             )
 
         )
