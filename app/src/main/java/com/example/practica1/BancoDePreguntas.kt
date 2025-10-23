@@ -81,12 +81,14 @@ object BancoDePreguntas {
                 opciones = listOf("Blink-182", "Foo Fighters", "Linkin Park", "Paramore"),
                 respuestaCorrecta = 2,
                 dificultad = 0,
+                imageId = R.drawable.numb
             ),
             Pregunta(
                 texto = "¿Cuál de estos álbumes pertenece al grupo Green Day?",
                 opciones = listOf("Hybrid Theory", "American Idiot", "Meteora", "Franz Ferdinand"),
                 respuestaCorrecta = 1,
                 dificultad = 0,
+                imageId = R.drawable.mix6
             ),
             Pregunta(
                 texto = "¿Qué canción corresponde con la base que está sonando?",
@@ -155,7 +157,7 @@ object BancoDePreguntas {
                 respuestaCorrecta = 0,
                 dificultad = 1,
                 imageId = R.drawable.senorita,
-                audioResId = R.raw.señorita
+                audioResId = R.raw.senorita
             ),
             Pregunta(
                 texto = "¿A qué canción pertenece la siguiente base instrumental?",
