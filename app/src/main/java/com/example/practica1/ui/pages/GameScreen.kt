@@ -14,6 +14,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.practica1.GameViewModel
 import com.example.practica1.EndGame
 import com.example.practica1.Game
+import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.graphicsLayer
+
 
 // Pantalla de juego
 @Composable
@@ -35,10 +45,18 @@ fun GameScreen(
         }
     }
 
+    val radialGradientBrush = Brush.radialGradient(
+        colors = listOf(
+            Color(0xFF5A768F),
+            Color(0xFF2C3E50)
+        )
+    )
+
     // 2. DISEÑO DE LA PANTALLA
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(radialGradientBrush)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)
@@ -46,7 +64,9 @@ fun GameScreen(
         // Indicador de Pregunta
         Text(
             text = "Pregunta ${uiState.indicePreguntaActual + 1} de ${uiState.totalPreguntas}",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            color = Color.White
+
         )
 
         // Si la pregunta actual cuenta con una foto la muestra, sino no muestra nada
@@ -66,19 +86,17 @@ fun GameScreen(
         Text(
             text = uiState.preguntaActual.texto,
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp),
+            color = Color.White
         )
 
         // Opciones de Respuesta (Botones)
         uiState.preguntaActual.opciones.forEachIndexed { index, opcion ->
-            Button(
+            AnimatedOptionButton(
+                text = opcion,
                 onClick = { viewModel.verificarRespuesta(index) },
-                // Deshabilitar los botones si ya se pulsó o si el juego terminó
-                enabled = !uiState.seleccionBloqueada && !uiState.juegoTerminado,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(opcion)
-            }
+                enabled = !uiState.seleccionBloqueada && !uiState.juegoTerminado
+            )
         }
     }
 }
@@ -90,4 +108,36 @@ fun GameScreen_preview() {
     // El preview ya no funciona directamente porque GameScreen ahora necesita el NavController y ViewModel
     // Ahora hay que envolverlo con un NavController simulado
     Text("GameScreen Preview: Requiere NavController")
+}
+@Composable
+fun AnimatedOptionButton(
+    text: String,
+    onClick: () -> Unit,
+    enabled: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.60f else 1f,
+        label = "buttonScale"
+    )
+
+    Button(
+        onClick = onClick,
+        enabled = enabled,
+        interactionSource = interactionSource,
+        modifier = modifier
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
+            .fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF3498DB),
+            contentColor = Color.White
+        )
+    ) {
+        Text(text)
+    }
 }
