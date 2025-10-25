@@ -175,7 +175,7 @@ object BancoDePreguntas {
             ),
             Pregunta(
                 texto = "¿Cuál es el nombre de la siguiente canción en reversa?",
-                opciones = listOf("Aurora - Mora, De la Rose", "Droga - Mota, C Tangana", "Memorias - Mora", "512 - Mora"),
+                opciones = listOf("Aurora - Mora, De la Rose", "Droga - Mora, C Tangana", "Memorias - Mora", "512 - Mora"),
                 respuestaCorrecta = 1,
                 dificultad = 2,
                 audioResId = R.raw.drogareversa
