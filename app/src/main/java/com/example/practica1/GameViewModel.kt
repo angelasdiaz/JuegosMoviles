@@ -7,6 +7,11 @@ import androidx.compose.runtime.setValue
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import android.media.MediaPlayer
+import androidx.lifecycle.viewModelScope
+import kotlin.concurrent.timer
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // 1. DATA CLASS para el estado que se muestra en la pantalla
 data class GameUiState(
@@ -21,7 +26,8 @@ data class GameUiState(
     val puntuacion: Int = 0,
     val juegoTerminado: Boolean = false,
     val totalPreguntas: Int = 0,
-    val seleccionBloqueada: Boolean = false // Evita doble click
+    val seleccionBloqueada: Boolean = false, // Evita doble click
+    val tiempoRestante: Int = 120 // 2 minutos
 )
 
 // 2. VIEWMODEL para la lógica del juego
@@ -38,6 +44,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     // Lista de todas las preguntas del banco
     private val todasLasPreguntas: List<Pregunta> = BancoDePreguntas.obtenerPreguntas()
 
+    private var timerJob: Job? = null // Variable para el cronometro
+    private val tiempoTotal = 120 // 120 segundos = 2 mins
+
     init {
         resetGame()
     }
@@ -49,6 +58,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         )
         // Carga la primera pregunta y reproduce su audio si existe
         cargarPreguntaActual()
+        iniciarCronometro()
     }
 
     // Lógica para reproducir el audio
@@ -120,12 +130,39 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         } else {
             // Asegurarse de que el audio se detenga si el juego termina
             detenerAudio()
+            timerJob?.cancel()
         }
     }
+
+    private fun iniciarCronometro() {
+        timerJob?.cancel()  // Comprueba que no se haya iniciado otro cronometro
+
+        timerJob = viewModelScope.launch {
+            while (uiState.tiempoRestante > 0 && !uiState.juegoTerminado) {
+                delay(1000L)
+                uiState = uiState.copy(tiempoRestante = uiState.tiempoRestante - 1)
+            }
+
+            if (uiState.tiempoRestante <= 0 && !uiState.juegoTerminado) {
+                finalizarPorCronometro()
+            }
+        }
+    }
+
+    private fun finalizarPorCronometro() {
+        detenerAudio()
+        timerJob?.cancel()
+        uiState = uiState.copy (
+            juegoTerminado = true,
+            seleccionBloqueada = true
+        )
+    }
+
 
     // Se llama automáticamente cuando el ViewModel ya no se necesita (ej. al salir de la pantalla)
     override fun onCleared() {
         super.onCleared()
         detenerAudio()
+        timerJob?.cancel()
     }
 }

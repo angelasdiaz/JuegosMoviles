@@ -20,9 +20,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.sp
 
 
 // Pantalla de juego
@@ -52,21 +55,36 @@ fun GameScreen(
         )
     )
 
+    // Variable encargada de permitir que se guarde el contenido aunque se haga scroll vertical
+    val scrollState = rememberScrollState()
+
     // 2. DISEÑO DE LA PANTALLA
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(radialGradientBrush)
+            .verticalScroll(scrollState)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
+        // Cronometro
+        val mins = uiState.tiempoRestante / 60 // Se muestran los minutos restantes
+        val segs = uiState.tiempoRestante % 60 // Se muestran los segundos restantes
+        Text (
+            text = String.format("%d:%02d", mins, segs),
+            fontSize = 22.sp,
+            color = when {
+                uiState.tiempoRestante <= 10 -> Color.Red // Si el tiempo restante es <10segs el color cambia a rojo
+                uiState.tiempoRestante <= 30 -> Color.Yellow // Si el tiempo restante es <30segs el color cambia a amarillo
+                else -> Color.White
+            },
+        )
         // Indicador de Pregunta
         Text(
             text = "Pregunta ${uiState.indicePreguntaActual + 1} de ${uiState.totalPreguntas}",
             style = MaterialTheme.typography.titleMedium,
             color = Color.White
-
         )
 
         // Si la pregunta actual cuenta con una foto la muestra, sino no muestra nada
@@ -75,8 +93,8 @@ fun GameScreen(
                 painter = painterResource(id = it),
                 contentDescription = "imagenAsociada",
                 modifier = Modifier
-                    .width(350.dp)
-                    .height(350.dp),
+                    .width(275.dp)
+                    .height(275.dp),
             )
         }
 
