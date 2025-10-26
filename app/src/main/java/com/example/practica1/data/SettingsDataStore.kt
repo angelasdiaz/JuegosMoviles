@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -15,6 +16,8 @@ class SettingsDataStore(private val context: Context) {
     companion object {
         val THEME_KEY = booleanPreferencesKey("dark_theme")
         val VOLUME_KEY = floatPreferencesKey("volume")
+
+        val RANKING_KEY = stringPreferencesKey("ranking_list")
     }
 
     // Guardar tema
@@ -31,6 +34,12 @@ class SettingsDataStore(private val context: Context) {
         }
     }
 
+    suspend fun saveRanking(rankingJson: String) {
+        context.dataStore.edit { prefs ->
+            prefs[RANKING_KEY] = rankingJson
+        }
+    }
+
     // Leer tema
     val themeFlow: Flow<Boolean> = context.dataStore.data.map { prefs ->
         prefs[THEME_KEY] ?: false
@@ -39,5 +48,9 @@ class SettingsDataStore(private val context: Context) {
     // Leer volumen
     val volumeFlow: Flow<Float> = context.dataStore.data.map { prefs ->
         prefs[VOLUME_KEY] ?: 0.5f
+    }
+
+    val rankingFlow: Flow<String> = context.dataStore.data.map { prefs ->
+        prefs[RANKING_KEY] ?: "[]"
     }
 }

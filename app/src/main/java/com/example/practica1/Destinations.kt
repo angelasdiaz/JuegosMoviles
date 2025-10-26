@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.List
 
 // Pantallas que forman el videojuego
 interface Destination {
@@ -31,5 +32,10 @@ object EndGame : Destination {
     override val route = "endGame/{puntuacion}/{totalPreguntas}"
 }
 
+object Ranking : Destination {
+    override val icon = Icons.Filled.List
+    override val route = "ranking"
+}
+
 // Pantallas disponibles en la barra superior
-val tabRowScreens = listOf(MainMenu, Options, Game, EndGame)
+val tabRowScreens = listOf(MainMenu, Options, Game, EndGame, Ranking)

@@ -16,6 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.practica1.data.SettingsDataStore
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collectLatest
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.practica1.GameViewModel
 
 class MainActivity : ComponentActivity() {
     private lateinit var settingsDataStore: SettingsDataStore
@@ -56,6 +58,7 @@ fun App(
     isDarkTheme: Boolean,
     onThemeChange: (Boolean) -> Unit
 ) {
+    val gameViewModel: GameViewModel = viewModel()
     val navController = rememberNavController()
     val currentBackStack by navController.currentBackStackEntryAsState()
     val currentDestination = currentBackStack?.destination
@@ -76,6 +79,7 @@ fun App(
             navController = navController,
             isDarkTheme = isDarkTheme,
             onThemeChange = onThemeChange,
+            gameViewModel = gameViewModel,
             modifier = Modifier.padding(innerPadding)
         )
     }

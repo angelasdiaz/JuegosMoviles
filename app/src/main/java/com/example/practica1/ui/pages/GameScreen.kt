@@ -30,6 +30,7 @@ import androidx.lifecycle.ViewModelProvider // Importación necesaria
 import androidx.compose.ui.platform.LocalContext // Importación necesaria
 import androidx.compose.ui.text.style.TextAlign // Importación necesaria
 import androidx.navigation.NavController // Importación necesaria
+import androidx.compose.runtime.LaunchedEffect
 
 // Pantalla de juego
 @Composable
@@ -39,6 +40,10 @@ fun GameScreen(
     viewModel: GameViewModel = viewModel(factory = gameViewModelFactory)
 ) {
     val uiState = viewModel.uiState
+
+    LaunchedEffect(Unit) {
+        viewModel.resetGame()
+    }
 
     // LÓGICA DE NAVEGACIÓN
     if (uiState.juegoTerminado) {
@@ -133,10 +138,10 @@ fun AnimatedOptionButton(
     enabled: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
+    val interactionSource = remember(enabled) { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.60f else 1f,
+        targetValue = if (isPressed && enabled) 0.75f else 1f,
         label = "buttonScale"
     )
 

@@ -35,13 +35,21 @@ import androidx.compose.ui.graphics.Brush
 @Composable
 fun MainMenuScreen(
     onSeeOptionsClick: () -> Unit = {},
-    onSeeGameClick: () -> Unit = {},
+    onSeeRankingClick: () -> Unit = {},
+    onSeeGameClick: () -> Unit = {}
 ) {
     val jugarInteractionSource = remember { MutableInteractionSource() }
     val isJugarPressed by jugarInteractionSource.collectIsPressedAsState()
     val jugarScale by animateFloatAsState(
         targetValue = if (isJugarPressed) 0.75f else 1f,
         label = "jugarScale"
+    )
+
+    val rankingInteractionSource = remember { MutableInteractionSource() }
+    val isRankingPressed by rankingInteractionSource.collectIsPressedAsState()
+    val rankingScale by animateFloatAsState(
+        targetValue = if (isRankingPressed) 0.65f else 1f,
+        label = "rankingScale"
     )
 
     val opcionesInteractionSource = remember { MutableInteractionSource() }
@@ -108,6 +116,30 @@ fun MainMenuScreen(
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
+            onClick = { onSeeRankingClick() },
+            interactionSource = rankingInteractionSource,
+            modifier = Modifier
+                .graphicsLayer {
+                    scaleX = rankingScale
+                    scaleY = rankingScale
+                }
+                .fillMaxWidth(0.4f) // Mismo tamaño que Opciones
+                .height(70.dp),     // Mismo tamaño que Opciones
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF2ECC71), // Un color verde
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "Ranking",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Button(
             onClick = { onSeeOptionsClick() },
             interactionSource = opcionesInteractionSource,
             modifier = Modifier
@@ -135,5 +167,9 @@ fun MainMenuScreen(
 @Preview
 @Composable
 fun MainMenuScreen_Preview(){
-    MainMenuScreen()
+    MainMenuScreen(
+        onSeeOptionsClick = {},
+        onSeeRankingClick = {},
+        onSeeGameClick = {}
+    )
 }

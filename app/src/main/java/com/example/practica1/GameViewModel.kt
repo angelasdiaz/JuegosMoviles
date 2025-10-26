@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken // Importacion de Gson
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -24,6 +25,11 @@ private data class JsonPregunta(
     val dificultad: Int,
     val audioResName: String? = null,
     val imageName: String? = null
+)
+
+data class ScoreEntry(
+    val nombre: String,
+    val puntuacion: Int
 )
 data class GameUiState(
     val preguntaActual: Pregunta = Pregunta(
@@ -40,7 +46,8 @@ data class GameUiState(
     val totalPreguntas: Int = 0,
     val seleccionBloqueada: Boolean = false,
     val tiempoRestante: Int = 120,
-    val volumen: Float = 0.5f
+    val volumen: Float = 0.5f,
+    val rankingList: List<ScoreEntry> = emptyList()
 )
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
@@ -48,6 +55,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val dataStore = SettingsDataStore(application)
     private var mediaPlayer: MediaPlayer? = null
 
+    private val gson = Gson()
+    private val listType = object : TypeToken<List<ScoreEntry>>() {}.type
+    private val scoreListType = object : TypeToken<List<ScoreEntry>>() {}.type
     var uiState by mutableStateOf(GameUiState())
         private set
 
@@ -65,7 +75,16 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
 
-        resetGame()
+        viewModelScope.launch {
+            dataStore.rankingFlow.collectLatest { rankingJson ->
+                try {
+                    val scores: List<ScoreEntry> = gson.fromJson(rankingJson, scoreListType)
+                    uiState = uiState.copy(rankingList = scores.sortedByDescending { it.puntuacion })
+                } catch (e: Exception) {
+                    uiState = uiState.copy(rankingList = emptyList())
+                }
+            }
+        }
     }
 
     private fun cargarPreguntasDesdeJson(): List<Pregunta> {
@@ -105,6 +124,25 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         iniciarCronometro()
     }
 
+    fun addScore(nombre: String, puntuacion: Int) {
+        viewModelScope.launch {
+
+            val currentRankingJson = dataStore.rankingFlow.first()
+            val currentRanking: MutableList<ScoreEntry> = try {
+                gson.fromJson(currentRankingJson, listType) ?: mutableListOf()
+            } catch (e: Exception) {
+                mutableListOf()
+            }
+
+            currentRanking.add(ScoreEntry(nombre = nombre, puntuacion = puntuacion))
+
+            val sortedRanking = currentRanking.sortedByDescending { it.puntuacion }.take(10)
+
+            val newRankingJson = gson.toJson(sortedRanking)
+
+            dataStore.saveRanking(newRankingJson)
+        }
+    }
     fun setVolume(value: Float) {
         uiState = uiState.copy(volumen = value)
         mediaPlayer?.setVolume(value, value)

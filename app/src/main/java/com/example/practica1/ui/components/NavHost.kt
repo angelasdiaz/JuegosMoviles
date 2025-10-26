@@ -13,6 +13,7 @@ import com.example.practica1.ui.pages.EndGameScreen
 import com.example.practica1.ui.pages.GameScreen
 import com.example.practica1.ui.pages.MainMenuScreen
 import com.example.practica1.ui.pages.OptionsScreen
+import com.example.practica1.ui.pages.RankingScreen
 
 // Navegación principal entre pantallas
 @Composable
@@ -20,10 +21,9 @@ fun CustomNavHost(
     navController: NavHostController,
     isDarkTheme: Boolean,
     onThemeChange: (Boolean) -> Unit,
+    gameViewModel: GameViewModel,
     modifier: Modifier = Modifier
 ) {
-    // Compartir un único GameViewModel entre Game y Options
-    val gameViewModel: GameViewModel = viewModel()
 
     NavHost(
         navController = navController,
@@ -38,6 +38,9 @@ fun CustomNavHost(
                 },
                 onSeeOptionsClick = {
                     navController.navigate(Options.route) { launchSingleTop = true }
+                },
+                onSeeRankingClick = {
+                    navController.navigate(Ranking.route) { launchSingleTop = true }
                 }
             )
         }
@@ -47,7 +50,7 @@ fun CustomNavHost(
             OptionsScreen(
                 isDarkTheme = isDarkTheme,
                 onThemeChange = onThemeChange,
-                viewModel = gameViewModel // comparte el mismo GameViewModel
+                viewModel = gameViewModel
             )
         }
 
@@ -73,7 +76,18 @@ fun CustomNavHost(
             EndGameScreen(
                 navController = navController,
                 puntuacion = puntuacion,
-                totalPreguntas = totalPreguntas
+                totalPreguntas = totalPreguntas,
+                gameViewModel = gameViewModel
+            )
+        }
+
+        composable(route = Ranking.route) {
+            // Obtenemos el estado actual del viewModel
+            val uiState = gameViewModel.uiState
+            // Le pasamos *solo* la lista a la pantalla
+            RankingScreen(
+                navController = navController,
+                rankingList = uiState.rankingList
             )
         }
     }
