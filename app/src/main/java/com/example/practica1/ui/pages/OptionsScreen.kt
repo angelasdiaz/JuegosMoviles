@@ -16,15 +16,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.practica1.GameViewModel
 
-// Pantalla de opciones mejorada con slider de volumen
 @Composable
 fun OptionsScreen(
     isDarkTheme: Boolean,
     onThemeChange: (Boolean) -> Unit,
-    volume: Float = 0.5f,
-    onVolumeChange: (Float) -> Unit = {}
+    viewModel: GameViewModel = viewModel() // Conectamos al ViewModel del juego
 ) {
+    val uiState = viewModel.uiState
+
     val switchInteractionSource = remember { MutableInteractionSource() }
     val isSwitchPressed by switchInteractionSource.collectIsPressedAsState()
     val switchScale by animateFloatAsState(
@@ -33,14 +35,8 @@ fun OptionsScreen(
     )
 
     val radialGradientBrush = Brush.radialGradient(
-        colors = listOf(
-            Color(0xFF2C3E50),
-            Color(0xFF5A768F)
-        )
+        colors = listOf(Color(0xFF2C3E50), Color(0xFF5A768F))
     )
-
-    // Estado local del slider si no se pasa un callback
-    var sliderValue by remember { mutableStateOf(volume) }
 
     Column(
         modifier = Modifier
@@ -59,7 +55,7 @@ fun OptionsScreen(
             modifier = Modifier.padding(bottom = 40.dp)
         )
 
-        // Botón tema oscuro
+        // Tema oscuro
         Box(
             modifier = Modifier
                 .graphicsLayer {
@@ -101,7 +97,7 @@ fun OptionsScreen(
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        // Volumen Slider
+        // Volumen
         Column(
             modifier = Modifier
                 .fillMaxWidth(0.8f)
@@ -112,18 +108,15 @@ fun OptionsScreen(
                 .padding(horizontal = 24.dp, vertical = 16.dp)
         ) {
             Text(
-                text = "Volumen: ${(sliderValue * 100).toInt()}%",
+                text = "Volumen: ${(uiState.volumen * 100).toInt()}%",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = if (isDarkTheme) Color.White else Color.Black,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             Slider(
-                value = sliderValue,
-                onValueChange = {
-                    sliderValue = it
-                    onVolumeChange(it)
-                },
+                value = uiState.volumen,
+                onValueChange = { viewModel.setVolume(it) }, // Conecta al ViewModel
                 valueRange = 0f..1f,
                 colors = SliderDefaults.colors(
                     thumbColor = Color(0xFF3498DB),

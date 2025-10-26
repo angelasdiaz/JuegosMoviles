@@ -14,7 +14,6 @@ import com.example.practica1.ui.components.CustomNavHost
 import com.example.practica1.ui.theme.Practica1Theme
 import com.example.practica1.MainMenu
 
-// Funcion principal
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,15 +21,10 @@ class MainActivity : ComponentActivity() {
             // Estado que controla si está activado el tema oscuro
             var isDarkTheme by remember { mutableStateOf(false) }
 
-            // Estado global del volumen
-            var volume by remember { mutableStateOf(0.5f) }
-
             Practica1Theme(darkTheme = isDarkTheme) {
                 App(
                     isDarkTheme = isDarkTheme,
-                    onThemeChange = { isDarkTheme = it },
-                    volume = volume,
-                    onVolumeChange = { volume = it }
+                    onThemeChange = { isDarkTheme = it }
                 )
             }
         }
@@ -41,9 +35,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App(
     isDarkTheme: Boolean,
-    onThemeChange: (Boolean) -> Unit,
-    volume: Float,
-    onVolumeChange: (Float) -> Unit
+    onThemeChange: (Boolean) -> Unit
 ) {
     val navController = rememberNavController()
     val currentBackStack by navController.currentBackStackEntryAsState()
@@ -65,10 +57,7 @@ fun App(
             navController = navController,
             isDarkTheme = isDarkTheme,
             onThemeChange = onThemeChange,
-            volume = volume,
-            onVolumeChange = onVolumeChange,
             modifier = Modifier.padding(innerPadding)
         )
     }
 }
-

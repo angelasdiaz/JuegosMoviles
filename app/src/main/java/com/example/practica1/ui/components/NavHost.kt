@@ -2,36 +2,35 @@ package com.example.practica1.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.example.practica1.EndGame
-import com.example.practica1.Game
-import com.example.practica1.MainMenu
-import com.example.practica1.Options
+import com.example.practica1.*
 import com.example.practica1.ui.pages.EndGameScreen
 import com.example.practica1.ui.pages.GameScreen
 import com.example.practica1.ui.pages.MainMenuScreen
 import com.example.practica1.ui.pages.OptionsScreen
 
-// Funcion utilizada para la navegacion entre pantallas
+// Navegación principal entre pantallas
 @Composable
 fun CustomNavHost(
     navController: NavHostController,
     isDarkTheme: Boolean,
     onThemeChange: (Boolean) -> Unit,
-    volume: Float,
-    onVolumeChange: (Float) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // Compartir un único GameViewModel entre Game y Options
+    val gameViewModel: GameViewModel = viewModel()
+
     NavHost(
         navController = navController,
         startDestination = MainMenu.route,
         modifier = modifier
     ) {
-        // Botones y navegacion dentro del menu principal
+        // Pantalla principal
         composable(route = MainMenu.route) {
             MainMenuScreen(
                 onSeeGameClick = {
@@ -43,37 +42,34 @@ fun CustomNavHost(
             )
         }
 
-        // Botones y navegacion dentro del menu de opciones
+        // Pantalla de opciones
         composable(route = Options.route) {
             OptionsScreen(
                 isDarkTheme = isDarkTheme,
                 onThemeChange = onThemeChange,
-                volume = volume,
-                onVolumeChange = onVolumeChange
+                viewModel = gameViewModel // comparte el mismo GameViewModel
             )
         }
 
-        // Botones y navegacion dentro del menu del juego
+        // Pantalla del juego
         composable(route = Game.route) {
-            // NOTA: GameScreen ahora necesita el NavController para navegar a EndGame
-            GameScreen(navController = navController)
+            GameScreen(
+                navController = navController,
+                viewModel = gameViewModel // mismo ViewModel => mismo volumen
+            )
         }
 
-        // Botones y navegacion dentro del menu final (¡Ahora con argumentos!)
+        // Pantalla de fin de juego (recibe argumentos)
         composable(
             route = EndGame.route,
-            // 1. Definimos los argumentos que esperamos recibir
             arguments = listOf(
                 navArgument("puntuacion") { type = NavType.IntType },
                 navArgument("totalPreguntas") { type = NavType.IntType }
             )
         ) { backStackEntry ->
-
-            // 2. Extraemos los argumentos de la ruta
             val puntuacion = backStackEntry.arguments?.getInt("puntuacion") ?: 0
             val totalPreguntas = backStackEntry.arguments?.getInt("totalPreguntas") ?: 1
 
-            // 3. Pasamos los argumentos a la pantalla
             EndGameScreen(
                 navController = navController,
                 puntuacion = puntuacion,
