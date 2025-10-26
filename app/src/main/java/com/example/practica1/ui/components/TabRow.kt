@@ -64,7 +64,13 @@ private fun CustomTab(
     onSelected: () -> Unit,
     selected: Boolean
 ) {
-    val color = Color.Black
+    // Cambia el color con la temática
+    val color = if (selected) {
+        MaterialTheme.colorScheme.onSurface
+    } else {
+        MaterialTheme.colorScheme.onSurface.copy(alpha = InactiveTabOpacity)
+    }
+
     val durationMillis = if (selected) TabFadeInAnimationDuration else TabFadeOutAnimationDuration
     val animSpec = remember {
         tween<Color>(
@@ -73,10 +79,12 @@ private fun CustomTab(
             delayMillis = TabFadeInAnimationDelay
         )
     }
+
     val tabTintColor by animateColorAsState(
-        targetValue = if (selected) color else color.copy(alpha = InactiveTabOpacity),
+        targetValue = color,
         animationSpec = animSpec
     )
+
     Row(
         modifier = Modifier
             .padding(16.dp)
@@ -93,7 +101,10 @@ private fun CustomTab(
     ) {
         Icon(imageVector = icon, contentDescription = text, tint = tabTintColor)
         Spacer(Modifier.width(12.dp))
-        Text(text.uppercase(Locale.getDefault()), color = tabTintColor)
+        Text(
+            text = text.uppercase(Locale.getDefault()),
+            color = tabTintColor
+        )
     }
 }
 

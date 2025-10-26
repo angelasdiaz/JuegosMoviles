@@ -1,29 +1,29 @@
-// NavHost.kt (Reemplazado)
 package com.example.practica1.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-
-import com.example.practica1.ui.pages.MainMenuScreen
-import com.example.practica1.ui.pages.OptionsScreen
-import com.example.practica1.ui.pages.GameScreen
-import com.example.practica1.ui.pages.EndGameScreen
-
 import com.example.practica1.EndGame
 import com.example.practica1.Game
 import com.example.practica1.MainMenu
 import com.example.practica1.Options
-
+import com.example.practica1.ui.pages.EndGameScreen
+import com.example.practica1.ui.pages.GameScreen
+import com.example.practica1.ui.pages.MainMenuScreen
+import com.example.practica1.ui.pages.OptionsScreen
 
 // Funcion utilizada para la navegacion entre pantallas
 @Composable
 fun CustomNavHost(
     navController: NavHostController,
+    isDarkTheme: Boolean,
+    onThemeChange: (Boolean) -> Unit,
+    volume: Float,
+    onVolumeChange: (Float) -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -34,18 +34,23 @@ fun CustomNavHost(
         // Botones y navegacion dentro del menu principal
         composable(route = MainMenu.route) {
             MainMenuScreen(
-                onSeeGameClick ={
-                    navController.navigate(Game.route) {launchSingleTop = true}
+                onSeeGameClick = {
+                    navController.navigate(Game.route) { launchSingleTop = true }
                 },
-                onSeeOptionsClick ={
-                    navController.navigate(Options.route) {launchSingleTop = true}
+                onSeeOptionsClick = {
+                    navController.navigate(Options.route) { launchSingleTop = true }
                 }
             )
         }
 
         // Botones y navegacion dentro del menu de opciones
         composable(route = Options.route) {
-            OptionsScreen()
+            OptionsScreen(
+                isDarkTheme = isDarkTheme,
+                onThemeChange = onThemeChange,
+                volume = volume,
+                onVolumeChange = onVolumeChange
+            )
         }
 
         // Botones y navegacion dentro del menu del juego
