@@ -8,18 +8,31 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practica1.data.SettingsDataStore
+import com.google.gson.Gson // Importacion de Gson
+import com.google.gson.reflect.TypeToken // Importacion de Gson
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.io.IOException
 
+//para el .json
+private data class JsonPregunta(
+    val texto: String,
+    val opciones: List<String>,
+    val respuestaCorrecta: Int,
+    val dificultad: Int,
+    val audioResName: String? = null,
+    val imageName: String? = null
+)
 data class GameUiState(
     val preguntaActual: Pregunta = Pregunta(
         texto = "",
         opciones = listOf("", "", "", ""),
         respuestaCorrecta = 0,
         dificultad = 0,
-        audioResId = null
+        audioResName = null,
+        imageName = null
     ),
     val indicePreguntaActual: Int = 0,
     val puntuacion: Int = 0,
@@ -38,7 +51,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     var uiState by mutableStateOf(GameUiState())
         private set
 
-    private val todasLasPreguntas: List<Pregunta> = BancoDePreguntas.obtenerPreguntas()
+
+    private val todasLasPreguntas: List<Pregunta> = cargarPreguntasDesdeJson()
     private var timerJob: Job? = null
     private val tiempoTotal = 120
 
@@ -52,6 +66,31 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
 
         resetGame()
+    }
+
+    private fun cargarPreguntasDesdeJson(): List<Pregunta> {
+        val jsonString: String
+        val context = getApplication<Application>().applicationContext
+        try {
+            jsonString = context.assets.open("preguntas.json").bufferedReader().use { it.readText() }
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+            return emptyList()
+        }
+
+        val listJsonPreguntaType = object : TypeToken<List<JsonPregunta>>() {}.type
+        val jsonPreguntas: List<JsonPregunta> = Gson().fromJson(jsonString, listJsonPreguntaType)
+
+        return jsonPreguntas.map { jsonPregunta ->
+            Pregunta(
+                texto = jsonPregunta.texto,
+                opciones = jsonPregunta.opciones,
+                respuestaCorrecta = jsonPregunta.respuestaCorrecta,
+                dificultad = jsonPregunta.dificultad,
+                audioResName = jsonPregunta.audioResName,
+                imageName = jsonPregunta.imageName
+            )
+        }
     }
 
     fun resetGame() {
@@ -76,15 +115,20 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun reproducirAudio(audioResId: Int?) {
+    private fun reproducirAudio(audioResName: String?) {
         detenerAudio()
 
-        if (audioResId != null) {
-            mediaPlayer = MediaPlayer.create(getApplication(), audioResId)
-            mediaPlayer?.apply {
-                isLooping = true
-                setVolume(uiState.volumen, uiState.volumen)
-                start()
+        if (audioResName != null) {
+            val context = getApplication<Application>().applicationContext
+            val audioResId = context.resources.getIdentifier(audioResName, "raw", context.packageName)
+
+            if (audioResId != 0) { // 0 = no encontrado
+                mediaPlayer = MediaPlayer.create(context, audioResId)
+                mediaPlayer?.apply {
+                    isLooping = true
+                    setVolume(uiState.volumen, uiState.volumen)
+                    start()
+                }
             }
         }
     }
@@ -102,7 +146,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 preguntaActual = proximaPregunta,
                 seleccionBloqueada = false
             )
-            reproducirAudio(proximaPregunta.audioResId)
+            reproducirAudio(proximaPregunta.audioResName)
         }
     }
 

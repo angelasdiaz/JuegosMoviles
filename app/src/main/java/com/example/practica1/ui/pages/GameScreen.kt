@@ -1,4 +1,4 @@
-// GameScreen.kt (Reemplazado)
+// GameScreen.kt (CORREGIDO)
 package com.example.practica1.ui.pages
 
 import androidx.compose.foundation.layout.*
@@ -26,24 +26,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.sp
-
+import androidx.lifecycle.ViewModelProvider // Importación necesaria
+import androidx.compose.ui.platform.LocalContext // Importación necesaria
+import androidx.compose.ui.text.style.TextAlign // Importación necesaria
+import androidx.navigation.NavController // Importación necesaria
 
 // Pantalla de juego
 @Composable
 fun GameScreen(
-    navController: androidx.navigation.NavController, // Necesitas el NavController para navegar
-    viewModel: GameViewModel = viewModel() // Crea o encuentra el ViewModel
+    navController: NavController,
+    gameViewModelFactory: ViewModelProvider.Factory? = null,
+    viewModel: GameViewModel = viewModel(factory = gameViewModelFactory)
 ) {
     val uiState = viewModel.uiState
 
-    // 1. LÓGICA DE NAVEGACIÓN: Si el juego ha terminado, vamos a la pantalla final
+    // LÓGICA DE NAVEGACIÓN
     if (uiState.juegoTerminado) {
-        // Construye la ruta con los valores reales de puntuación y total
         navController.navigate(EndGame.route
             .replace("{puntuacion}", uiState.puntuacion.toString())
             .replace("{totalPreguntas}", uiState.totalPreguntas.toString())
         ) {
-            // Esto evita que al pulsar "Atrás" se vuelva a esta pantalla de juego ya terminada
             popUpTo(Game.route) { inclusive = true }
         }
     }
@@ -55,10 +57,11 @@ fun GameScreen(
         )
     )
 
-    // Variable encargada de permitir que se guarde el contenido aunque se haga scroll vertical
     val scrollState = rememberScrollState()
 
-    // 2. DISEÑO DE LA PANTALLA
+    val context = LocalContext.current
+
+    // DISEÑO DE LA PANTALLA
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -69,14 +72,14 @@ fun GameScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         // Cronometro
-        val mins = uiState.tiempoRestante / 60 // Se muestran los minutos restantes
-        val segs = uiState.tiempoRestante % 60 // Se muestran los segundos restantes
+        val mins = uiState.tiempoRestante / 60
+        val segs = uiState.tiempoRestante % 60
         Text (
             text = String.format("%d:%02d", mins, segs),
             fontSize = 22.sp,
             color = when {
-                uiState.tiempoRestante <= 10 -> Color.Red // Si el tiempo restante es <10segs el color cambia a rojo
-                uiState.tiempoRestante <= 30 -> Color.Yellow // Si el tiempo restante es <30segs el color cambia a amarillo
+                uiState.tiempoRestante <= 10 -> Color.Red
+                uiState.tiempoRestante <= 30 -> Color.Yellow
                 else -> Color.White
             },
         )
@@ -87,15 +90,18 @@ fun GameScreen(
             color = Color.White
         )
 
-        // Si la pregunta actual cuenta con una foto la muestra, sino no muestra nada
-        uiState.preguntaActual.imageId?.let {
-            Image(
-                painter = painterResource(id = it),
-                contentDescription = "imagenAsociada",
-                modifier = Modifier
-                    .width(275.dp)
-                    .height(275.dp),
-            )
+        uiState.preguntaActual.imageName?.let { imageName ->
+            val imageId = context.resources.getIdentifier(imageName, "drawable", context.packageName) //
+
+            if (imageId != 0) { // 0 = no encontrado
+                Image(
+                    painter = painterResource(id = imageId),
+                    contentDescription = "imagenAsociada",
+                    modifier = Modifier
+                        .width(275.dp)
+                        .height(275.dp),
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -105,7 +111,8 @@ fun GameScreen(
             text = uiState.preguntaActual.texto,
             style = MaterialTheme.typography.headlineMedium,
             modifier = Modifier.padding(bottom = 16.dp),
-            color = Color.White
+            color = Color.White,
+            textAlign = TextAlign.Center // Centra el texto de la pregunta
         )
 
         // Opciones de Respuesta (Botones)
@@ -119,14 +126,6 @@ fun GameScreen(
     }
 }
 
-// Preview de la pantalla de juego
-@Preview
-@Composable
-fun GameScreen_preview() {
-    // El preview ya no funciona directamente porque GameScreen ahora necesita el NavController y ViewModel
-    // Ahora hay que envolverlo con un NavController simulado
-    Text("GameScreen Preview: Requiere NavController")
-}
 @Composable
 fun AnimatedOptionButton(
     text: String,
@@ -158,4 +157,10 @@ fun AnimatedOptionButton(
     ) {
         Text(text)
     }
+}
+
+@Preview
+@Composable
+fun GameScreen_preview() {
+    Text("GameScreen Preview: Requiere NavController y Factory")
 }

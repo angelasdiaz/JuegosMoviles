@@ -62,5 +62,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
+    //base de datos en .json
+    implementation("com.google.code.gson:gson:2.10.1")
+
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 }

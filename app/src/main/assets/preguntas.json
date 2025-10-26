@@ -1,0 +1,276 @@
+[
+  {
+    "texto": "¿Qué canción de las siguientes fue la más escuchada en España en 2022?",
+    "opciones": ["Despechá - Rosalía", "Quevedo: Bzrp Music Sessions, Vol.52", "La Bachata - Manuel Turizo", "Tarot - Bad Bunny, Jhayco"],
+    "respuestaCorrecta": 1,
+    "dificultad": 0,
+    "imageName": "mix1"
+  },
+  {
+    "texto": "¿A qué álbum pertenece la canción de la imagen?",
+    "opciones": ["Un verano sin ti", "Vice Versa", "Donde quiero estar", "Easy Money Baby"],
+    "respuestaCorrecta": 2,
+    "dificultad": 0,
+    "imageName": "playadelingles"
+  },
+  {
+    "texto": "¿Cómo se llama este éxito viral de Sabrina Carpenter que dominó las listas de éxitos en 2024?",
+    "opciones": ["Please Please Please", "Espresso", "Feather", "Nonsense"],
+    "respuestaCorrecta": 1,
+    "dificultad": 0,
+    "imageName": "mix2"
+  },
+  {
+    "texto": "¿Cómo se llama esta colaboración de Mark Ronson y Bruno Mars?",
+    "opciones": ["24K Magic", "Locked Out of Heaven", "Treasure", "Uptown Funk"],
+    "respuestaCorrecta": 3,
+    "dificultad": 0,
+    "imageName": "uptownfunk"
+  },
+  {
+    "texto": "¿Cuál fue el álbum debut del artista emergente Rusowsky?",
+    "opciones": ["Pórtate bien!", "Daisy", "Data", "Primera musa"],
+    "respuestaCorrecta": 2,
+    "dificultad": 0,
+    "imageName": "mix5"
+  },
+  {
+    "texto": "¿A qué álbum pertenece la canción de la imagen?",
+    "opciones": ["Desde el Fin del Mundo", "MTFC", "Supernova", "Data"],
+    "respuestaCorrecta": 3,
+    "dificultad": 0,
+    "imageName": "volver"
+  },
+  {
+    "texto": "¿A qué artistas internacionales pertenece la canción que está sonando?",
+    "opciones": ["Taylor Swift y Sabrina Carpenter", "Taylor Swift y Olivia Rodrigo", "Taylor Swift y Charli XCX", "Taylor Swift y Gracie Abrams"],
+    "respuestaCorrecta": 0,
+    "dificultad": 0,
+    "audioResName": "thelifeofashowgirl",
+    "imageName": "thelifeofashowgirl"
+  },
+  {
+    "texto": "¿Cuál fue el primer álbum de Sabrina Carpenter?",
+    "opciones": ["Short n’ Sweet", "Can't Blame a Girl for Trying", "Emails I Cant Send", "Eyes Wide Open"],
+    "respuestaCorrecta": 3,
+    "dificultad": 0,
+    "imageName": "mix3"
+  },
+  {
+    "texto": "¿A qué grupo de rock español pertenece la canción que está sonando?",
+    "opciones": ["Pignoise", "Marea", "Extremoduro", "Kaotiko"],
+    "respuestaCorrecta": 2,
+    "dificultad": 0,
+    "audioResName": "jesucristogarcia",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cuál de los siguientes fue el disco más reproducido de 2024?",
+    "opciones": ["HIT ME HARD AND SOFT - Billie Eilish", "Short n' Sweet - Sabrina Carpenter", "THE TORTURED POETS DEPARTMENT - Taylor Swift", "eternal sunshine - Ariana Grande"],
+    "respuestaCorrecta": 2,
+    "dificultad": 0,
+    "imageName": "mix4"
+  },
+  {
+    "texto": "¿De qué banda es la canción “Numb”?",
+    "opciones": ["Blink-182", "Foo Fighters", "Linkin Park", "Paramore"],
+    "respuestaCorrecta": 2,
+    "dificultad": 0,
+    "imageName": "numb"
+  },
+  {
+    "texto": "¿Cuál de estos álbumes pertenece al grupo Green Day?",
+    "opciones": ["Hybrid Theory", "American Idiot", "Meteora", "Franz Ferdinand"],
+    "respuestaCorrecta": 1,
+    "dificultad": 0,
+    "imageName": "mix6"
+  },
+  {
+    "texto": "¿Qué canción corresponde con la base que está sonando?",
+    "opciones": ["Baby Hello - Rauw Alejandro", "Una última vez - Soge Culebra, Saiko", "Neverita - Bad Bunny", "Supernova - Saiko"],
+    "respuestaCorrecta": 3,
+    "dificultad": 1,
+    "audioResName": "supernova_",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿En cuál de las siguientes canciones no colabora el artista Bad Bunny?",
+    "opciones": ["No me conoce remix", "Te boté remix", "Me llueven 3.0", "47 - remix"],
+    "respuestaCorrecta": 3,
+    "dificultad": 1,
+    "imageName": "badbunny"
+  },
+  {
+    "texto": "Esta icónica melodía de sintetizador que está sonando pertenece a uno de los mayores éxitos de The Weekend. ¿De qué canción se trata?",
+    "opciones": ["Save Your Tears", "Starboy", "Blinding Lights", "Can’t Feel My Face"],
+    "respuestaCorrecta": 2,
+    "dificultad": 1,
+    "audioResName": "blinding_lights",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "Esta famosa introducción de piano pertenece a una de las baladas más importantes de Adele. ¿Cuál es?",
+    "opciones": ["Hello", "Someone Like You", "Rolling in the Deep", "Easy on Me"],
+    "respuestaCorrecta": 1,
+    "dificultad": 1,
+    "audioResName": "someonelikeyou",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cómo se llama la canción del dúo icónico de Ralphie Choo y Rusowsky que está sonando?",
+    "opciones": ["ALTAGAMA", "DtMF", "VOYCONTODO", "BBY ROMEO"],
+    "respuestaCorrecta": 3,
+    "dificultad": 1,
+    "audioResName": "todo",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cómo se llama este himno del trap argentino, con artistas como Duki, Khea y C.R.O?",
+    "opciones": ["Tumando el Club", "GIVENCHY", "Mbappe", "Nueva Era"],
+    "respuestaCorrecta": 0,
+    "dificultad": 1,
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cómo se llama esta canción de Mother Mother?",
+    "opciones": ["Hayloft", "Arms Tonite", "Hayloft II", "Burning Pile"],
+    "respuestaCorrecta": 0,
+    "dificultad": 1,
+    "audioResName": "hailoft",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cómo se llama la canción que está sonando?",
+    "opciones": ["Clean", "Messy", "Dirty", "Soft"],
+    "respuestaCorrecta": 1,
+    "dificultad": 1,
+    "audioResName": "messy",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Adivina qué canción es esta versión a piano?",
+    "opciones": ["Garden of Eden", "Elizabeth Taylor", "The ordinary", "The night we met"],
+    "respuestaCorrecta": 2,
+    "dificultad": 1,
+    "audioResName": "ordinary",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿En qué año fue el que más se escuchó la famosa canción de 'Señorita' de Abraham Mateo?",
+    "opciones": ["2013", "2012", "2009", "2014"],
+    "respuestaCorrecta": 0,
+    "dificultad": 1,
+    "imageName": "senorita",
+    "audioResName": "senorita"
+  },
+  {
+    "texto": "¿A qué canción pertenece la siguiente base instrumental?",
+    "opciones": ["Crawling", "Basket Case", "All the Small Things", "In the End"],
+    "respuestaCorrecta": 3,
+    "dificultad": 1,
+    "audioResName": "inthend",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿De qué canción es esta intro?",
+    "opciones": ["Bring Me to Life", "All the Things She Said", "Pressure", "On my Own"],
+    "respuestaCorrecta": 0,
+    "dificultad": 1,
+    "audioResName": "brigmetolife",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cuál es el nombre de la siguiente canción en reversa?",
+    "opciones": ["Aurora - Mora, De la Rose", "Droga - Mora, C Tangana", "Memorias - Mora", "512 - Mora"],
+    "respuestaCorrecta": 1,
+    "dificultad": 2,
+    "audioResName": "drogareversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "La siguiente canción en reversa es una de las más escuchadas de Feid, ¿de cuál se trata?",
+    "opciones": ["La inocente", "Luna", "Classy 101", "Si te la encuentras por ahí"],
+    "respuestaCorrecta": 0,
+    "dificultad": 2,
+    "audioResName": "inocentereversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "Esos violines agudos son inconfundibles, incluso al revés. ¿A qué clásico himno pop de Britney Spears pertenecen?",
+    "opciones": ["…Baby One More Time", "Gimme More", "Oops!... I Did It Again", "Toxic"],
+    "respuestaCorrecta": 3,
+    "dificultad": 2,
+    "audioResName": "toxicreversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "Esta canción usó un loop de percusión tropical que fue un éxito mundial masivo para Ed Sheeran. ¿Puedes identificarla al revés?",
+    "opciones": ["Perfect", "Shape of You", "Castle on the Hill", "Bad Habits"],
+    "respuestaCorrecta": 1,
+    "dificultad": 2,
+    "audioResName": "shapeofureversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cómo se llama este éxito de Duki y Khea, sacado en 2017, que se escucha en reversa?",
+    "opciones": ["WACHA", "AURORA", "She Don't Give a Fo", "QUEVASHACERHOY?"],
+    "respuestaCorrecta": 2,
+    "dificultad": 2,
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cómo se llama este hit de 2025 interpretado por Bad Bunny, Omar Courtz y Dei V, reproducido en reversa?",
+    "opciones": ["VeLDÁ", "EoO", "Malbec", "Konbini Wars"],
+    "respuestaCorrecta": 0,
+    "dificultad": 2,
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cuál es esta canción de la película de Barbie?",
+    "opciones": ["Speed Drive", "What Was I Made For?", "Dance The Night", "Barbie World"],
+    "respuestaCorrecta": 0,
+    "dificultad": 2,
+    "audioResName": "speeddrivereversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿De quién es esta canción en reversa?",
+    "opciones": ["Kaotiko", "Ska-P", "La Polla Records", "Extremoduro"],
+    "respuestaCorrecta": 0,
+    "dificultad": 2,
+    "audioResName": "nocomobarbienoreversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cuál es esta canción en reversa?",
+    "opciones": ["Cha cha cha", "Slow Down", "Come & Get it", "Von dutch"],
+    "respuestaCorrecta": 2,
+    "dificultad": 2,
+    "audioResName": "comegaetitreversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "Esta canción en reversa es la más conocida de un grupo ¿Qué grupo es?",
+    "opciones": ["Arctic Monkeys", "Twenty one pilots", "Panic at the disco", "The neighbourhood"],
+    "respuestaCorrecta": 1,
+    "dificultad": 2,
+    "audioResName": "stressedreversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿Cuál es esta canción en reversa?",
+    "opciones": ["Roxanne", "All Star", "Losing my Religion", "Take Me to Church"],
+    "respuestaCorrecta": 2,
+    "dificultad": 2,
+    "audioResName": "religionreversa",
+    "imageName": "escucharmusica"
+  },
+  {
+    "texto": "¿A qué grupo pertenece esta canción en reversa?",
+    "opciones": ["The Police", "Weezer", "Radiohead", "Nirvana"],
+    "respuestaCorrecta": 1,
+    "dificultad": 2,
+    "audioResName": "inthesunreversa",
+    "imageName": "escucharmusica"
+  }
+]
