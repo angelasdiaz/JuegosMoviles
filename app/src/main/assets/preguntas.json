@@ -126,10 +126,10 @@
   },
   {
     "texto": "¿Cómo se llama este himno del trap argentino, con artistas como Duki, Khea y C.R.O?",
-    "opciones": ["Tumando el Club", "GIVENCHY", "Mbappe", "Nueva Era"],
+    "opciones": ["Tumbando el Club", "GIVENCHY", "Mbappe", "Nueva Era"],
     "respuestaCorrecta": 0,
     "dificultad": 1,
-"audioResName": "hailoft",
+"audioResName": "tumbandoelclub",
     "imageName": "escucharmusica"
   },
   {
@@ -137,7 +137,7 @@
     "opciones": ["Hayloft", "Arms Tonite", "Hayloft II", "Burning Pile"],
     "respuestaCorrecta": 0,
     "dificultad": 1,
-    "audioResName": "tumbandoelclub",
+    "audioResName": "hailoft",
     "imageName": "escucharmusica"
   },
   {
@@ -182,7 +182,7 @@
   },
   {
     "texto": "¿Cuál es el nombre de la siguiente canción en reversa?",
-    "opciones": ["Aurora - Mora, De la Rose", "Droga - Mora, C Tangana", "Memorias - Mora", "512 - Mora"],
+    "opciones": ["Aurora - Mora y De la Rose", "Droga - Mora y C Tangana", "Memorias - Mora", "512 - Mora"],
     "respuestaCorrecta": 1,
     "dificultad": 2,
     "audioResName": "drogareversa",
