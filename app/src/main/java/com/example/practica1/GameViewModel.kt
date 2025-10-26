@@ -1,17 +1,18 @@
 package com.example.practica1
 
+import android.app.Application
+import android.media.MediaPlayer
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import android.media.MediaPlayer
 import androidx.lifecycle.viewModelScope
+import com.example.practica1.data.SettingsDataStore
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-// Estado UI del juego
 data class GameUiState(
     val preguntaActual: Pregunta = Pregunta(
         texto = "",
@@ -26,36 +27,53 @@ data class GameUiState(
     val totalPreguntas: Int = 0,
     val seleccionBloqueada: Boolean = false,
     val tiempoRestante: Int = 120,
-    val volumen: Float = 0.5f // 🔊 Nuevo campo
+    val volumen: Float = 0.5f
 )
 
-// ViewModel
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val dataStore = SettingsDataStore(application)
     private var mediaPlayer: MediaPlayer? = null
 
     var uiState by mutableStateOf(GameUiState())
         private set
 
     private val todasLasPreguntas: List<Pregunta> = BancoDePreguntas.obtenerPreguntas()
-
     private var timerJob: Job? = null
     private val tiempoTotal = 120
 
     init {
+        // Cargar volumen guardado al iniciar
+        viewModelScope.launch {
+            dataStore.volumeFlow.collectLatest { savedVolume ->
+                uiState = uiState.copy(volumen = savedVolume)
+                mediaPlayer?.setVolume(savedVolume, savedVolume)
+            }
+        }
+
         resetGame()
     }
 
     fun resetGame() {
-        uiState = GameUiState(totalPreguntas = todasLasPreguntas.size)
+        uiState = uiState.copy(
+            indicePreguntaActual = 0,
+            puntuacion = 0,
+            juegoTerminado = false,
+            totalPreguntas = todasLasPreguntas.size,
+            tiempoRestante = tiempoTotal
+        )
         cargarPreguntaActual()
         iniciarCronometro()
     }
 
-    // Cambia el volumen y actualiza el MediaPlayer activo
     fun setVolume(value: Float) {
         uiState = uiState.copy(volumen = value)
         mediaPlayer?.setVolume(value, value)
+
+        // Guardar el volumen persistente
+        viewModelScope.launch {
+            dataStore.saveVolume(value)
+        }
     }
 
     private fun reproducirAudio(audioResId: Int?) {
@@ -90,7 +108,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun verificarRespuesta(opcionSeleccionada: Int) {
         if (uiState.seleccionBloqueada) return
-
         uiState = uiState.copy(seleccionBloqueada = true)
         detenerAudio()
 

@@ -12,19 +12,38 @@ import androidx.navigation.compose.rememberNavController
 import com.example.practica1.ui.components.CustomTabRow
 import com.example.practica1.ui.components.CustomNavHost
 import com.example.practica1.ui.theme.Practica1Theme
-import com.example.practica1.MainMenu
+import androidx.lifecycle.lifecycleScope
+import com.example.practica1.data.SettingsDataStore
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collectLatest
 
 class MainActivity : ComponentActivity() {
+    private lateinit var settingsDataStore: SettingsDataStore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        settingsDataStore = SettingsDataStore(this)
+
         setContent {
-            // Estado que controla si está activado el tema oscuro
             var isDarkTheme by remember { mutableStateOf(false) }
+
+            // Cargar valor guardado
+            LaunchedEffect(Unit) {
+                settingsDataStore.themeFlow.collectLatest {
+                    isDarkTheme = it
+                }
+            }
 
             Practica1Theme(darkTheme = isDarkTheme) {
                 App(
                     isDarkTheme = isDarkTheme,
-                    onThemeChange = { isDarkTheme = it }
+                    onThemeChange = { newTheme ->
+                        isDarkTheme = newTheme
+                        // Guardar persistente
+                        lifecycleScope.launch {
+                            settingsDataStore.saveTheme(newTheme)
+                        }
+                    }
                 )
             }
         }
