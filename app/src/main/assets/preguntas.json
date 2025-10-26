@@ -129,6 +129,7 @@
     "opciones": ["Tumando el Club", "GIVENCHY", "Mbappe", "Nueva Era"],
     "respuestaCorrecta": 0,
     "dificultad": 1,
+"audioResName": "hailoft",
     "imageName": "escucharmusica"
   },
   {
@@ -136,7 +137,7 @@
     "opciones": ["Hayloft", "Arms Tonite", "Hayloft II", "Burning Pile"],
     "respuestaCorrecta": 0,
     "dificultad": 1,
-    "audioResName": "hailoft",
+    "audioResName": "tumbandoelclub",
     "imageName": "escucharmusica"
   },
   {
@@ -216,6 +217,7 @@
     "opciones": ["WACHA", "AURORA", "She Don't Give a Fo", "QUEVASHACERHOY?"],
     "respuestaCorrecta": 2,
     "dificultad": 2,
+"audioResName": "shedontreversa",
     "imageName": "escucharmusica"
   },
   {
@@ -223,6 +225,7 @@
     "opciones": ["VeLDÁ", "EoO", "Malbec", "Konbini Wars"],
     "respuestaCorrecta": 0,
     "dificultad": 2,
+"audioResName": "veldareversa",
     "imageName": "escucharmusica"
   },
   {
