@@ -61,7 +61,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     var uiState by mutableStateOf(GameUiState())
         private set
 
-
+    private var gameInProgress = false
     private val todasLasPreguntas: List<Pregunta> = cargarPreguntasDesdeJson()
     private var timerJob: Job? = null
     private val tiempoTotal = 120
@@ -113,6 +113,11 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun resetGame() {
+
+        if (gameInProgress && !uiState.juegoTerminado) return
+
+        gameInProgress = true
+
         uiState = uiState.copy(
             indicePreguntaActual = 0,
             puntuacion = 0,
@@ -214,6 +219,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         } else {
             detenerAudio()
             timerJob?.cancel()
+            gameInProgress = false
         }
     }
 
@@ -232,6 +238,15 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun pauseTimer() {
+        timerJob?.cancel()
+    }
+
+    fun resumeTimer() {
+        if (gameInProgress && !uiState.juegoTerminado) {
+            iniciarCronometro()
+        }
+    }
     private fun finalizarPorCronometro() {
         detenerAudio()
         timerJob?.cancel()
@@ -239,6 +254,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             juegoTerminado = true,
             seleccionBloqueada = true
         )
+        gameInProgress = false
     }
 
     override fun onCleared() {

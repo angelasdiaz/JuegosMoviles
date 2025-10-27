@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalContext // Importación necesaria
 import androidx.compose.ui.text.style.TextAlign // Importación necesaria
 import androidx.navigation.NavController // Importación necesaria
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 
 // Pantalla de juego
 @Composable
@@ -43,6 +44,15 @@ fun GameScreen(
 
     LaunchedEffect(Unit) {
         viewModel.resetGame()
+    }
+
+    DisposableEffect(Unit) {
+
+        viewModel.resumeTimer()
+
+        onDispose {
+            viewModel.pauseTimer()
+        }
     }
 
     // LÓGICA DE NAVEGACIÓN
